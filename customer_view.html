@@ -1,0 +1,144 @@
+<!--
+// **************************************************
+// *      Author: Daniel Mebrahtom                  *
+// *       ID No: M80007953                         *
+// *     College: CIT, Network Security             *
+// *    Special Thanks to Dr.Mohammad Kuhail        *
+//***************************************************
+-->
+
+<html>
+    <head>
+        <title>Seashells Restaurant</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!--bootstrap links-->
+      
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"  crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="script/script.js?12"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"  crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"  crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"  crossorigin="anonymous"></script>
+       
+        <script id="task-template" type="text/html">
+         <div class="food-menu-box">
+                <div class="food-menu-img">
+                    <img src="images/{{item_name}}.jpg" onerror="this.src='images/ALT IMAGE.jpg'" class="img-responsive img-curve">
+                </div>
+
+                <div class="food-menu-desc">
+                    <h4>{{item_name}}</h4>
+                    <p class="food-price">{{price}}AED</p>
+                    <p class="food-detail">
+                      {{item_description}}
+		    </p>
+                    
+                    <button onclick="order(this);" item_name="{{ID}}" class="btn btn-primary">BUY NOW</button>
+                    
+                </div>
+            </div>
+        
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="script/templating_engine.js"></script>
+    
+    <link rel="stylesheet" href="style/style_customer.css?7">
+     <link rel="stylesheet" href="style/sidebar.css?2">
+</head>
+    <body onload='read_theme();'>
+        <input type="checkbox" checked="checked">
+        <span class="icon"></span>
+        
+        <ul>
+            
+            <li><a href="#home" onclick="window.location.reload()"> <i class="fa fa-home" style="font-size:24px"></i> </a></li>
+            <li><a href="#catagory"><i class="fa fa-bars" style="font-size:24px"></i></a></li>
+            <li><a href="#search"><i class="fa fa-search" style="font-size:24px"></i></a></li>
+            <li><a href="#" onclick="window.location.replace('cart.html')"><i class="fa fa-shopping-cart" style="font-size:24px"></i></a></li>
+            
+           
+            
+            <li><a style="position:fixed; bottom:22%;" href="#" onclick="logout();"><i class="fa fa-power-off" style="font-size:24px"></i></a></li>
+            <li><a href="#" style="position:fixed; bottom:15%; margin:1px;" onclick="set_theme_dark();"><i class="fa fa-moon-o"></i></a></li>
+            <li><a href="#" style="position:fixed; bottom:8%;" onclick="set_theme_light();"><i class="fa fa-sun-o"></i></a></li>
+        </ul>
+           
+        <!-- fOOD sEARCH Section Starts Here -->
+    <section class="food-search text-center">
+        <div class="container">
+            <form action="food-search.html" method="POST">
+                <input type="text" id="search" placeholder="Search By Name.." required>
+                <button onclick="return get_item();" type="submit"  class="btn btn-primary">Search</button>
+            </form>
+
+        </div>
+    </section>
+    <!-- fOOD sEARCH Section Ends Here -->
+    
+     <!-- Food search Result -->
+      <section class="">
+        <div class="container">
+            <table><tr><td>
+            <section id="test"></section>  
+            </td></tr></table>
+        </div>
+     </section>
+    <!-- Food search Result ends here -->
+    
+    <!-- Serving Category-->
+    <section id="catagory" class="categories">
+        <div class="container">
+            <h2 class="text-center">Explore Our Menu</h2>
+            
+            <a href="#show" onclick="get_category(this);" id="2">
+            <div class="box-3 float-container">
+                <img src="images/pizza.jpg" alt="Pizza" class="img-responsive img-curve">
+
+               
+            </div>
+            </a>
+
+            <a href="#show" onclick="get_category(this);" id="1">
+            <div class="box-3 float-container">
+                <img src="images/burger.jpg" alt="Burger" class="img-responsive img-curve">
+
+               
+            </div>
+            </a>
+
+            <a href="#show" onclick="get_category(this);" id="3">
+            <div class="box-3 float-container">
+                <img src="images/BEEF BRIYANI.jpg" alt="Briyani" class="img-responsive img-curve">
+
+               
+            </div>
+            </a>
+            
+             <a href="#show" onclick="get_category(this);" id="4">
+            <div class="box-3 float-container">
+                <img src="images/Drink.jpg" alt="Momo" class="img-responsive img-curve">
+
+              
+            </div>
+            </a>
+            <div class="clearfix"></div>
+        </div>
+    </section>
+    <!-- Categories Section Ends Here -->
+    <!-- Display Start here-->
+    
+    <section class="food-menu" id='food-menu'>
+        <div class="container">
+       <h2 id="show" class="text-center">Food Menu</h2>
+        <div  class="col-sm-12">
+            <div id="tasks"></div>
+        </div>
+        <button style="MARGIN-LEFT: 43%" onclick="return get_menu();" type="button" class="btn btn-primary">See All Serving</button>
+         </div>     
+    </section>
+    <!-- Display Start ends here-->
+   
+    </body>

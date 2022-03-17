@@ -1,0 +1,101 @@
+<!--
+// **************************************************
+// *      Author: Daniel Mebrathom                  *
+// *       ID No: M80007953                         *
+// *     College: CIT, Network Security             *
+// *    Special Thanks to Dr.Mohammad Kuhail        *
+//***************************************************
+-->
+
+
+<html>
+    <head>
+        <title>Order Management</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!--bootstrap links-->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"  crossorigin="anonymous">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="script/script.js?12"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"  crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"  crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"  crossorigin="anonymous"></script>
+       
+        <script id="task-template" type="text/html">
+            <tr><td>{{ID}}</td><td>{{Customer}}</td><td>{{item_name}}</td><td>{{price}}&nbsp;AED</td></td>
+            <td><select id="status" onchange="update_status(this)" class="form-control" order_ID="{{ID}}" selected="{{status}}">
+                  <option value="1">Ordered</option>
+                  <option value="2">Preparing</option>
+                  <option value="3">Delivering</option>        
+                  <option value="4">Delivered</option>        
+                 
+              </select>
+                </td></tr>
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="script/templating_engine.js"></script>
+    
+    <link rel="stylesheet" href="style/style_customer.css?7">
+     <link rel="stylesheet" href="style/sidebar.css?4">
+</head>
+    <body onload=" get_pending_orders(); read_theme();">
+        <input type="checkbox" checked="checked">
+        <span class="icon"></span>
+        
+        <ul>
+            
+            <li><a href="#home" onclick="window.location.replace('Staff_view.html')"> <i class="fa fa-dashboard" style="font-size:24px"></i> </a></li>
+           
+            <li><a href="#search"><i class="fa fa-search" style="font-size:24px"></i></a></li>
+           
+          
+            <li><a style="position:fixed; bottom:22%;" href="#" onclick="logout();"><i class="fa fa-power-off" style="font-size:24px"></i></a></li>
+            <li><a href="#" style="position:fixed; bottom:15%; margin:1px;" onclick="set_theme_dark();"><i class="fa fa-moon-o"></i></a></li>
+            <li><a href="#" style="position:fixed; bottom:8%;" onclick="set_theme_light();"><i class="fa fa-sun-o"></i></a></li>
+        </ul>
+        
+        <!-- fOOD sEARCH Section Starts Here -->
+    <section class="food-search text-center">
+        <div class="container">
+            <form  method="POST">
+                <input type="text" id="search" placeholder="Search Order by ID.." required>
+                <button onclick="return order_search();" type="submit"  class="btn btn-primary">Search</button>
+            </form>
+
+        </div>
+    </section>
+       <!-- Dashboard Section Starts Here --> 
+     <section id="catagory" class="categories">
+        <div class="container">
+            <a href="#show" onclick="window.location.reload()" id="4">
+              <button  type="submit"  class="btn btn-primary">PENDING ORDERS</button>
+            </a>
+            
+            <a href="#show" onclick="window.location.replace('Staff_view.html')" id="5">
+              <button  type="submit"  class="btn btn-primary">MENU DASHBOARD</button>
+            </a>
+            
+        </div>
+         
+        
+     </section>
+         
+         <!-- Dashboard Sections ends Here-->
+         <!-- Display Section Starts Here-->
+         <section style="margin-left: 10%; margin-top: 1%"> 
+         <div  class="col-sm-12">
+                <table class='table'>
+                    <thead>
+                        <tr><th>Order ID</th><th>Customer</th><th>Product Name</th><th>Price</th><th>Status</th><th></th></tr>
+                    </thead>
+                    <tbody id="tasks">
+                        <!-- the tasks data go here -->
+                    </tbody>
+                </table>
+            </div>
+         </section>
+         <!-- Display Section Ends Here-->
+
+</body>
+</html>

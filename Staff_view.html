@@ -1,0 +1,180 @@
+<!--
+// **************************************************
+// *      Author: Daniel Mebrathom                  *
+// *       ID No: M80007953                         *
+// *     College: CIT, Network Security             *
+// *    Special Thanks to Dr.Mohammad Kuhail        *
+//***************************************************
+-->
+
+
+<html>
+    <head>
+        <title>Admin View Seashells</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!--bootstrap links-->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"  crossorigin="anonymous">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <!-- CSS only -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <script src="script/script.js?18"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"  crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"  crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"  crossorigin="anonymous"></script>
+       
+        <script id="task-template" type="text/html">
+            <tr>
+            <td>{{ID}}</td>><td>{{item_name}}</td><td>{{item_description}}</td><td>{{price}}&nbsp;AED</td></td>
+            <td>{{status}}</td>
+           
+            <td style="text-align: center"><input {{item_checked}} data-item-id='{{ID}}' onclick='hide_task(this);' type='checkbox'></td>
+            </tr>
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="script/templating_engine.js"></script>
+    
+    <link rel="stylesheet" href="style/style_customer.css?8">
+     <link rel="stylesheet" href="style/sidebar_Admin.css?6">
+</head>
+    <body onload="return initial();">
+       
+            <input type="radio" >
+        <span class="icon"></span>
+        <ul>
+            <li><a href="#home" onclick="window.location.reload()"> <i class="fa fa-home" style="font-size:24px"></i> </a></li>
+            <li><a href="#catagory"><i class="fa fa-bars" style="font-size:24px"></i></a></li>
+            <li><a href="#search"><i class="fa fa-search" style="font-size:24px"></i></a></li>
+            <li><a><i class="fa fa-plus" style="font-size:24px" onclick="$('#task-success').hide();" class="btn btn-primary" data-toggle="modal" data-target="#add_task_popup"></i></a></li>     
+           <li><a style="position:fixed; bottom:22%;" href="#" onclick="logout();"><i class="fa fa-power-off" style="font-size:24px"></i></a></li>
+            <li><a href="#" style="position:fixed; bottom:15%; margin:1px;" onclick="set_theme_dark();"><i class="fa fa-moon-o"></i></a></li>
+            <li><a href="#" style="position:fixed; bottom:8%;" onclick="set_theme_light();"><i class="fa fa-sun-o"></i></a></li>
+        </ul>
+       
+        
+        <!-- fOOD sEARCH Section Starts Here -->
+    <section class="food-search text-center">
+        <div class="container">
+            <form  method="POST">
+                <input type="text" id="search" placeholder="Search For Product.." required>
+                <button onclick="return admin_search();" type="submit"  class="btn btn-primary">Search</button>
+            </form>
+
+        </div>
+    </section>
+       <!-- Dashboard Section Starts Here --> 
+     <section id="catagory" class="categories">
+        <div class="container">
+            
+            <a href="#show" onclick="window.location.reload();" id="all">
+            <div class="box-admin float-container">
+                 <button  type="button"  class="btn btn-primary">ALL SERVING MENU </button>
+            </div>   
+            </a>
+           
+            <a href="#show" onclick="get_category(this);" id="2">
+            <div class="box-admin float-container">
+              <button  type="submit"  class="btn btn-primary">PIZZA CATEGORY</button>
+            </div>   
+            </a>
+            
+             <a href="#show" onclick="get_category(this);" id="1">
+            <div  class="box-admin float-container">
+               <button  type="submit"  class="btn btn-primary">BURGER CATEGORY</button>
+            </div>   
+            </a>
+            
+            <a href="#show" onclick="get_category(this);" id="3">
+            <div class="box-admin float-container">
+               <button  type="submit"  class="btn btn-primary">BRIYANI CATEGORY</button>
+            </div>   
+            </a>
+            
+             <a href="#show" onclick="get_category(this);" id="4">
+            <div  class="box-admin float-container">
+                <button  type="submit"  class="btn btn-primary">DRINKS CATEGORY</button>
+            </div>   
+            </a>
+            
+             <a href="#show" onclick="window.location.replace('Order_Managment.html')" id="5">
+            <div  class="box-admin float-container">
+               <button  type="submit"  class="btn btn-primary">PENDING ORDERS</button>
+            </div>   
+            </a>
+            
+        <a> 
+        <div  class="box-admin float-container">    
+        <button onclick="$('#task-success').hide();" class="btn btn-primary" data-toggle="modal" data-target="#add_task_popup">
+                    ADD TO MENU
+                </button>
+          </div>   
+          </a>
+        </div>
+     </section>
+         
+         <!-- Dashboard Sections ends Here-->
+         <!-- Display Section Starts Here-->
+         <section style="margin-left: 12%; margin-top: 5%"> 
+         <div  class="col-sm-10">
+                <table class='table'>
+                    <thead>
+                        <tr><th>ID</th><th>Product Name</th><th>Description</th><th>Price</th><th>Status</th><th>Hide Product</th></tr>
+                    </thead>
+                    <tbody id="tasks">
+                        <!-- the tasks data go here -->
+                    </tbody>
+                </table>
+            </div>
+         </section>
+         <!-- Display Section Ends Here-->
+         
+        <!--Modal Section for Adding Product Starts Here -->
+                    <!-- Modal -->
+                <div class="modal fade" id="add_task_popup" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Add Product</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                          <div class="form-group">
+                              <input type="text" class="form-control" placeholder="Enter product name" id="new_product_name">
+                          </div>
+                          <div class="form-group">
+                              <input type="text" class="form-control" placeholder="Product Description" id="new_product_name_description">
+                          </div>
+                          <div class="form-group">
+                              <input type="number" class="form-control" placeholder="Price" id="new_product_price">
+                          </div>
+                          
+                          <div class="form-group">
+                              <select class="form-control" id="product_category">
+                                    <option value="1">Burger</option>
+                                    <option value="2">Pizza</option>
+                                    <option value="3">Biryani</option>        
+                                    <option value="4">Drinks</option>         
+                              </select>
+                          </div>
+                          <div class="form-group">
+                              <span id="task-success" class="badge badge-pill badge-success">The product has been added successfully</span>
+                          </div>
+
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button onclick="add_to_menu();" type="button" class="btn btn-primary">Add Product</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+        <!--Modal Section for Adding Product Ends Here -->
+       
+        
+         
+</body>
+</html>

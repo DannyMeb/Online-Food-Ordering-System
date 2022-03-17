@@ -1,0 +1,88 @@
+<!--
+// **************************************************
+// *      Author: Daniel Mebrahtom                  *
+// *       ID No: M80007953                         *
+// *     College: CIT, Network Security             *
+// *    Special Thanks to Dr.Mohammad Kuhail        *
+//***************************************************
+-->
+
+<html>
+    <head>
+        <title>Shopping Cart</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!--bootstrap links-->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"  crossorigin="anonymous">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="script/script.js?11"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"  crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"  crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"  crossorigin="anonymous"></script>
+       
+        <script id="task-template" type="text/html">
+         <div class="food-menu-box">
+                <div class="food-menu-img">
+                    <img src="images/{{item_name}}.jpg"  class="img-responsive img-curve">
+                </div>
+
+                <div class="food-menu-desc">
+                    <h4>{{item_name}}</h4>
+                    <p class="food-price">{{price}}AED</p>
+                    <p class="food-detail">
+                      {{description}}
+		    </p>
+                    
+                    <button class="btn">{{status}}</button><br>
+                    <button onclick="cancel_orders(this)" order_ID="{{ID}}" order_name="{{item_name}}" class="btn btn-primary">Cancel Order</button>
+                    
+                </div>
+            </div>
+        
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="script/templating_engine.js"></script>
+    
+    <link rel="stylesheet" href="style/style_customer.css?6">
+     <link rel="stylesheet" href="style/sidebar.css?2">
+</head>
+    <body onload="return get_orders()">
+        <input type="checkbox" checked="checked">
+        <span class="icon"></span>
+        
+        <ul>
+            
+            <li><a href="#customer_view.html" onclick="window.location.replace('customer_view.html')"> <i class="fa fa-home" style="font-size:24px"></i> </a></li>
+            <li><a href="#customer_view.html" onclick="window.location.replace('customer_view.html')"><i class="fa fa-bars" style="font-size:24px"></i></a></li>
+            
+            <li><a href="#shopping-cart.html"><i class="fa fa-shopping-cart" style="font-size:24px"></i></a></li>
+           
+            <li><a style="position:fixed; bottom:22%;" href="#" onclick="logout();"><i class="fa fa-power-off" style="font-size:24px"></i></a></li>
+            <li><a href="#" style="position:fixed; bottom:15%; margin:1px;" onclick="set_theme_dark();"><i class="fa fa-moon-o"></i></a></li>
+            <li><a href="#" style="position:fixed; bottom:8%;" onclick="set_theme_light();"><i class="fa fa-sun-o"></i></a></li>
+        
+        
+        </ul>
+    
+    
+    <section id="search" class="food-search text-center">
+        <div class="container">
+        </div>
+    </section>
+        
+  <!-- Display Start here-->
+    <section style="background-color:#ececec">
+    <section class="food-menu">
+        <div class="container">
+       <h2 id="show" class="text-center">Your Orders</h2>
+        <div  class="col-sm-12">
+            <div id="tasks"></div>   
+            </div>
+        </div>
+         <div class="clearfix"></div>
+    </section>
+    </section>
+    <!-- Display Start ends here-->
+  </body>
+</html>
