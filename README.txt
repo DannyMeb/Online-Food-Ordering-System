@@ -2,7 +2,7 @@ Hello Dear,
 
 This is a course project. 
 
-It allows new users to allow. 
+It allows new users to signup and enjoy the service. 
 
 For the admin login, use the following credentials:
 User:Daniel
